@@ -12,21 +12,33 @@ export default function App() {
       .catch(() => alert('We could not find that template.'));
   }, []);
 
-  const templateUrls = [];
+  // const templateUrls = [];
 
-  for (let i = 0; i < ImgTemplates.length; i++) {
-    templateUrls[i] = ImgTemplates[i].blank;
-    console.log(ImgTemplates[i].blank);
-  }
-  console.log(templateUrls[0]);
+  // for (let i = 0; i < ImgTemplates.length; i++) {
+  //   templateUrls[i] = ImgTemplates[i].blank;
+  //   console.log(ImgTemplates[i].blank);
+  // }
 
-  const templateImages = templateUrls.map((url, index) => (
+  // const templateImages = templateUrls.map((url, index) => (
+  //   <div className="template-img-wrap">
+  //     <img
+  //       className="template-img"
+  //       src={templateUrls[index]}
+  //       onClick={() => {
+  //         setTemplateImg(templateImages[index]);
+  //       }}
+  //     />
+  //   </div>
+  // ));
+
+  const templateImages = ImgTemplates.map((url, index) => (
     <div className="template-img-wrap">
       <img
         className="template-img"
-        src={templateUrls[index]}
+        src={ImgTemplates[index].blank}
         onClick={() => {
-          setTemplateImg(templateImages[index]);
+          setTemplateImg(ImgTemplates[index].id);
+          console.log(templateImg);
         }}
       />
     </div>
