@@ -101,6 +101,7 @@ export default function App() {
             />
             <br />
             <button
+              data-test-id="generate-meme"
               onClick={() => {
                 setTopText(topTextInputValue);
                 setBottomText(bottomTextInputValue);
