@@ -68,6 +68,10 @@ form {
   box-shadow: 15px 15px 0px 5px #000000;
 }
 
+.wrap button {
+  margin: 25px;
+}
+
 label {
   color: black;
   font-style: bold;

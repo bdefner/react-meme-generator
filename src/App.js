@@ -1,8 +1,11 @@
 import './App.css';
+import axios from 'axios';
+import fileDownload from 'js-file-download';
+// import download from 'download-to-file';
 import { useEffect, useState } from 'react';
 
 export default function App() {
-  const [templateImg, setTemplateImg] = useState(0);
+  const [templateImg, setTemplateImg] = useState('bongo');
   const [imgTemplates, setImgTemplates] = useState([]);
   const [topTextInputValue, setTopTextInputValue] = useState('');
   const [bottomTextInputValue, setBottomTextInputValue] = useState('');
@@ -15,6 +18,17 @@ export default function App() {
       .then((res) => setImgTemplates(res))
       .catch((error) => alert(error));
   }, []);
+
+  const downloadMeme = (url, filename) => {
+    axios
+      .get(url, {
+        responseType: 'blob',
+      })
+      .then((res) => {
+        fileDownload(res.data, filename);
+      })
+      .catch((err) => console.log(err));
+  };
 
   const templateImages = imgTemplates.map((url, index) => (
     <div key={`imageWrap of url: + ${url}`} className="template-img-wrap">
@@ -49,6 +63,7 @@ export default function App() {
               event.preventDefault();
             }}
           >
+            <label htmlFor="template-selector">Meme template</label>
             <select
               name="templates"
               id="template-selector"
@@ -107,9 +122,26 @@ export default function App() {
         <h2>3. ready to share</h2>
         <div className="result wrap">
           <img
-            src={`https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}.`}
+            data-test-id="meme-image"
+            src={`https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`}
             alt="created meme"
           />
+          <form
+            onSubmit={(event) => {
+              event.preventDefault();
+            }}
+          >
+            <button
+              onClick={() => {
+                downloadMeme(
+                  `https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`,
+                  'my-new-meme.jpg',
+                );
+              }}
+            >
+              Download
+            </button>
+          </form>
         </div>
       </div>
 
