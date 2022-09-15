@@ -61,6 +61,13 @@ form {
   align-items: center;
 }
 
+.result img {
+  width: 80;
+  max-width: 300px;
+  border-radius: 25px;
+  box-shadow: 15px 15px 0px 5px #000000;
+}
+
 label {
   color: black;
   font-style: bold;

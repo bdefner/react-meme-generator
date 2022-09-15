@@ -90,6 +90,7 @@ export default function App() {
               onClick={() => {
                 setTopText(topTextInputValue);
                 setBottomText(bottomTextInputValue);
+                console.log(templateImg);
               }}
             >
               Generate
@@ -105,7 +106,10 @@ export default function App() {
       <div className="column">
         <h2>3. ready to share</h2>
         <div className="result wrap">
-          <img src="logo192.png" alt="created meme" />
+          <img
+            src={`https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}.`}
+            alt="created meme"
+          />
         </div>
       </div>
 
