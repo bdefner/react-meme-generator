@@ -20,7 +20,7 @@ body {
 }
 
 .column h2 {
-  padding: 15px;
+  padding: 8px 15px;
   background-color: #f27a7d;
   font-size: 1.5rem;
   border: solid 0px;
@@ -36,6 +36,25 @@ body {
   border-radius: 25px;
   overflow: hidden;
   box-shadow: 15px 15px 0px 5px #000000;
+}
+
+.options-wrap {
+  margin: 25px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+label {
+  color: black;
+  font-style: bold;
+  font-size: 17px;
+}
+
+input {
+  text-align: center;
 }
 
 .template-img {

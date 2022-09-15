@@ -12,34 +12,18 @@ export default function App() {
       .catch(() => alert('We could not find that template.'));
   }, []);
 
-  // const templateUrls = [];
-
-  // for (let i = 0; i < ImgTemplates.length; i++) {
-  //   templateUrls[i] = ImgTemplates[i].blank;
-  //   console.log(ImgTemplates[i].blank);
-  // }
-
-  // const templateImages = templateUrls.map((url, index) => (
-  //   <div className="template-img-wrap">
-  //     <img
-  //       className="template-img"
-  //       src={templateUrls[index]}
-  //       onClick={() => {
-  //         setTemplateImg(templateImages[index]);
-  //       }}
-  //     />
-  //   </div>
-  // ));
-
   const templateImages = ImgTemplates.map((url, index) => (
-    <div className="template-img-wrap">
+    <div key={'imageWrap:' + { index }} className="template-img-wrap">
       <img
+        key={'templateImage: ' + { index }}
+        alt="meme-template"
         className="template-img"
         src={ImgTemplates[index].blank}
         onClick={() => {
           setTemplateImg(ImgTemplates[index].id);
           console.log(templateImg);
         }}
+        aria-hidden="true"
       />
     </div>
   ));
@@ -54,19 +38,29 @@ export default function App() {
         </div>
       </div>
       <div className="column">
-        <h2>2. meme it up</h2>
-        <select
-          name="templates"
-          id="templates"
-          value={templateImg}
-          onChange={(e) => setTemplateImg(e.currentTarget.value)}
-        >
-          {ImgTemplates.map((item) => (
-            <option key={item.id} value={item.id}>
-              {item.id}
-            </option>
-          ))}
-        </select>
+        <div className="options-wrap">
+          <h2>2. meme it up</h2>
+          <select
+            name="templates"
+            id="templates"
+            value={templateImg}
+            onChange={(element) => setTemplateImg(element.currentTarget.value)}
+          >
+            {ImgTemplates.map((item) => (
+              <option key={item.id} value={item.id}>
+                {item.id}
+              </option>
+            ))}
+          </select>
+          <br />
+          <label htmlFor="top-text-input">Top text</label>
+          <input id="top-text-input" />
+          <br />
+          <label htmlFor="bottom-text-input">Bottom text</label>
+          <input id="bottom-text-input" />
+          <br />
+          <button>Generate</button>
+        </div>
       </div>
 
       <div className="column">
