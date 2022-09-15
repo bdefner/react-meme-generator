@@ -1,7 +1,6 @@
 import './App.css';
 import axios from 'axios';
 import fileDownload from 'js-file-download';
-// import download from 'download-to-file';
 import { useEffect, useState } from 'react';
 
 export default function App() {
@@ -19,16 +18,16 @@ export default function App() {
       .catch((error) => alert(error));
   }, []);
 
-  const downloadMeme = (url, filename) => {
+  function downloadMeme(url) {
     axios
       .get(url, {
         responseType: 'blob',
       })
       .then((res) => {
-        fileDownload(res.data, filename);
+        fileDownload(res.data, 'my-meme.jpg');
       })
       .catch((err) => console.log(err));
-  };
+  }
 
   const templateImages = imgTemplates.map((url, index) => (
     <div key={`imageWrap of url: + ${url}`} className="template-img-wrap">
@@ -111,10 +110,6 @@ export default function App() {
               Generate
             </button>
           </form>
-          <br />
-          <br />
-          <p>topText: {topText}</p>
-          <p>bottomText: {bottomText}</p>
         </div>
       </div>
 
@@ -126,26 +121,18 @@ export default function App() {
             src={`https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`}
             alt="created meme"
           />
-          <form
-            onSubmit={(event) => {
-              event.preventDefault();
+
+          <button
+            onClick={() => {
+              downloadMeme(
+                `https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`,
+              );
             }}
           >
-            <button
-              onClick={() => {
-                downloadMeme(
-                  `https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`,
-                  'my-new-meme.jpg',
-                );
-              }}
-            >
-              Download
-            </button>
-          </form>
+            Download
+          </button>
         </div>
       </div>
-
-      <div></div>
     </container>
   );
 }
