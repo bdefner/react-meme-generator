@@ -3,13 +3,7 @@
 }
 
 body {
-  background: linear-gradient(
-    153deg,
-    rgba(255, 88, 234, 1) 0%,
-    rgba(136, 171, 251, 1) 32%,
-    rgba(82, 254, 58, 1) 59%,
-    rgba(255, 251, 11, 1) 96%
-  );
+  background: linear-gradient(153deg, #c5f9d7, #f7d486, #f27a7d);
   min-height: 100vh;
 }
 
@@ -27,7 +21,7 @@ body {
 
 .column h2 {
   padding: 15px;
-  background-color: rgba(35, 35, 35, 0.773);
+  background-color: #f27a7d;
   font-size: 1.5rem;
   border: solid 0px;
   border-radius: 5px;
