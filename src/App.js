@@ -11,29 +11,32 @@ export default function App() {
   const [topText, setTopText] = useState('Free memes');
   const [bottomText, setBottomText] = useState('for everyone');
 
-  // const fetchMemeTemplates = async () => {
-  //   try {
-  //     const fetchData = await fetch('https://api.memegen.link/templates');
-  //     const fetchedData = await fetchData.json();
-  //     setImgTemplates(fetchedData);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-  // useEffect(() => fetchMemeTemplates(), []);
+  const fetchMemeTemplates = async () => {
+    try {
+      const fetchData = await fetch('https://api.memegen.link/templates');
+      const fetchedData = await fetchData.json();
+      setImgTemplates(fetchedData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   useEffect(() => {
-    const fetchMemeTemplates = async () => {
-      try {
-        const fetchData = await fetch('https://api.memegen.link/templates');
-        const fetchedData = await fetchData.json();
-        setImgTemplates(fetchedData);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchMemeTemplates();
+    fetchMemeTemplates().catch((error) => console.log(error));
   }, []);
+
+  // useEffect(() => {
+  //   const fetchMemeTemplates = async () => {
+  //     try {
+  //       const fetchData = await fetch('https://api.memegen.link/templates');
+  //       const fetchedData = await fetchData.json();
+  //       setImgTemplates(fetchedData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchMemeTemplates();
+  // }, []);
 
   // useEffect(() => {
   //   fetch('https://api.memegen.link/templates')
