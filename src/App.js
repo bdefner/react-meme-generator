@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 export default function App() {
   const [templateImg, setTemplateImg] = useState('bongo');
   const [imgTemplates, setImgTemplates] = useState([]);
-  const [topTextInputValue, setTopTextInputValue] = useState('');
-  const [bottomTextInputValue, setBottomTextInputValue] = useState('');
+  // const [topTextInputValue, setTopTextInputValue] = useState('');
+  // const [bottomTextInputValue, setBottomTextInputValue] = useState('');
   const [topText, setTopText] = useState('Free memes');
   const [bottomText, setBottomText] = useState('for everyone');
 
@@ -24,26 +24,6 @@ export default function App() {
   useEffect(() => {
     fetchMemeTemplates().catch((error) => console.log(error));
   }, []);
-
-  // useEffect(() => {
-  //   const fetchMemeTemplates = async () => {
-  //     try {
-  //       const fetchData = await fetch('https://api.memegen.link/templates');
-  //       const fetchedData = await fetchData.json();
-  //       setImgTemplates(fetchedData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchMemeTemplates();
-  // }, []);
-
-  // useEffect(() => {
-  //   fetch('https://api.memegen.link/templates')
-  //     .then((res) => res.json())
-  //     .then((res) => setImgTemplates(res))
-  //     .catch((error) => alert(error));
-  // }, []);
 
   function downloadMeme(url) {
     axios
@@ -68,7 +48,6 @@ export default function App() {
         src={imgTemplates[index].blank}
         onClick={() => {
           setTemplateImg(imgTemplates[index].id);
-          console.log(templateImg);
         }}
         aria-hidden="true"
       />
@@ -97,7 +76,10 @@ export default function App() {
               name="templates"
               id="template-selector"
               value={templateImg}
-              onChange={(event) => setTemplateImg(event.currentTarget.value)}
+              onChange={(event) => {
+                setTemplateImg(event.currentTarget.value);
+                console.log(event.currentTarget.value);
+              }}
             >
               {imgTemplates.map((item) => (
                 <option key={item.id} value={item.id}>
@@ -106,37 +88,27 @@ export default function App() {
               ))}
             </select>
             <br />
-            <label
-              htmlFor="top-text-input"
-              onChange={() => {
-                setTopTextInputValue('Testify');
-                console.log('topTextValue: ', topTextInputValue);
-              }}
-            >
-              Top text
-            </label>
+            <label htmlFor="top-text-input">Top text</label>
             <input
               id="top-text-input"
               onChange={(event) => {
-                setTopTextInputValue(event.currentTarget.value);
+                setTopText(event.currentTarget.value);
               }}
             />
             <br />
             <label htmlFor="bottom-text-input">Bottom text</label>
             <input
               id="bottom-text-input"
-              onChange={(event) =>
-                setBottomTextInputValue(event.currentTarget.value)
-              }
+              onChange={(event) => setBottomText(event.currentTarget.value)}
             />
             <br />
             <button
               data-test-id="generate-meme"
-              onClick={() => {
-                setTopText(topTextInputValue);
-                setBottomText(bottomTextInputValue);
-                console.log(templateImg);
-              }}
+              // onClick={() => {
+              //   setTopText(topTextInputValue);
+              //   setBottomText(bottomTextInputValue);
+              //   console.log(templateImg);
+              // }}
             >
               Generate
             </button>
