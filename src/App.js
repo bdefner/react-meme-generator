@@ -22,25 +22,25 @@ export default function App() {
   // };
   // useEffect(() => fetchMemeTemplates(), []);
 
-  // useEffect(() => {
-  //   const fetchMemeTemplates = async () => {
-  //     try {
-  //       const fetchData = await fetch('https://api.memegen.link/templates');
-  //       const fetchedData = await fetchData.json();
-  //       setImgTemplates(fetchedData);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   };
-  //   fetchMemeTemplates();
-  // }, []);
-
   useEffect(() => {
-    fetch('https://api.memegen.link/templates')
-      .then((res) => res.json())
-      .then((res) => setImgTemplates(res))
-      .catch((error) => alert(error));
+    const fetchMemeTemplates = async () => {
+      try {
+        const fetchData = await fetch('https://api.memegen.link/templates');
+        const fetchedData = await fetchData.json();
+        setImgTemplates(fetchedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchMemeTemplates();
   }, []);
+
+  // useEffect(() => {
+  //   fetch('https://api.memegen.link/templates')
+  //     .then((res) => res.json())
+  //     .then((res) => setImgTemplates(res))
+  //     .catch((error) => alert(error));
+  // }, []);
 
   function downloadMeme(url) {
     axios
