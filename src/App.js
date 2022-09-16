@@ -11,6 +11,30 @@ export default function App() {
   const [topText, setTopText] = useState('Free memes');
   const [bottomText, setBottomText] = useState('for everyone');
 
+  // const fetchMemeTemplates = async () => {
+  //   try {
+  //     const fetchData = await fetch('https://api.memegen.link/templates');
+  //     const fetchedData = await fetchData.json();
+  //     setImgTemplates(fetchedData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+  // useEffect(() => fetchMemeTemplates(), []);
+
+  // useEffect(() => {
+  //   const fetchMemeTemplates = async () => {
+  //     try {
+  //       const fetchData = await fetch('https://api.memegen.link/templates');
+  //       const fetchedData = await fetchData.json();
+  //       setImgTemplates(fetchedData);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
+  //   fetchMemeTemplates();
+  // }, []);
+
   useEffect(() => {
     fetch('https://api.memegen.link/templates')
       .then((res) => res.json())
@@ -30,9 +54,12 @@ export default function App() {
   }
 
   const templateImages = imgTemplates.map((url, index) => (
-    <div key={`imageWrap of url: + ${url}`} className="template-img-wrap">
+    <div
+      key={`imageWrap of url: +${Math.random()}`}
+      className="template-img-wrap"
+    >
       <img
-        key={`templateImage of url:  + ${url}`}
+        key={`templateImage of url:  + ${Math.random()}`}
         alt="meme-template"
         className="template-img"
         src={imgTemplates[index].blank}
@@ -46,7 +73,7 @@ export default function App() {
   ));
 
   return (
-    <container className="app-wrap">
+    <div className="app-wrap">
       <div className="column">
         <h2>1. scroll and select</h2>
         <div className="template-selector-wrap">
@@ -134,6 +161,6 @@ export default function App() {
           </button>
         </div>
       </div>
-    </container>
+    </div>
   );
 }
