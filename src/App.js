@@ -6,8 +6,8 @@ import { useEffect, useState } from 'react';
 export default function App() {
   const [templateImg, setTemplateImg] = useState('bongo');
   const [imgTemplates, setImgTemplates] = useState([]);
-  // const [topTextInputValue, setTopTextInputValue] = useState('');
-  // const [bottomTextInputValue, setBottomTextInputValue] = useState('');
+  const [topTextInputValue, setTopTextInputValue] = useState('');
+  const [bottomTextInputValue, setBottomTextInputValue] = useState('');
   const [topText, setTopText] = useState('Free memes');
   const [bottomText, setBottomText] = useState('for everyone');
 
@@ -92,23 +92,25 @@ export default function App() {
             <input
               id="top-text-input"
               onChange={(event) => {
-                setTopText(event.currentTarget.value);
+                setTopTextInputValue(event.currentTarget.value);
               }}
             />
             <br />
             <label htmlFor="bottom-text-input">Bottom text</label>
             <input
               id="bottom-text-input"
-              onChange={(event) => setBottomText(event.currentTarget.value)}
+              onChange={(event) =>
+                setBottomTextInputValue(event.currentTarget.value)
+              }
             />
             <br />
             <button
               data-test-id="generate-meme"
-              // onClick={() => {
-              //   setTopText(topTextInputValue);
-              //   setBottomText(bottomTextInputValue);
-              //   console.log(templateImg);
-              // }}
+              onClick={() => {
+                setTopText(topTextInputValue);
+                setBottomText(bottomTextInputValue);
+                console.log(templateImg);
+              }}
             >
               Generate
             </button>
@@ -121,14 +123,14 @@ export default function App() {
         <div className="result wrap">
           <img
             data-test-id="meme-image"
-            src={`https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`}
+            src={`https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}.jpg`}
             alt="created meme"
           />
 
           <button
             onClick={() => {
               downloadMeme(
-                `https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}`,
+                `https://api.memegen.link/images/${templateImg}/${topText}/${bottomText}.jpg`,
               );
             }}
           >
